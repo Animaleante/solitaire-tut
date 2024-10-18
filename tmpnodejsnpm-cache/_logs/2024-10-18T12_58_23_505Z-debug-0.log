@@ -1,0 +1,28 @@
+0 verbose cli C:\Program Files\nodejs\node.exe C:\Program Files\nodejs\node_modules\npm\bin\npm-cli.js
+1 info using npm@10.8.2
+2 info using node@v20.18.0
+3 silly config load:file:C:\Program Files\nodejs\node_modules\npm\npmrc
+4 silly config load:file:C:\Users\Diogo Sota\.npmrc
+5 silly config load:file:C:\Users\Diogo Sota\AppData\Roaming\npm\etc\npmrc
+6 verbose title npm install pnpm
+7 verbose argv "install" "--global" "pnpm"
+8 verbose logfile logs-max:10 dir:C:\Users\Diogo Sota\Documents\MyProjects\solitaire-tut\tmpnodejsnpm-cache\_logs\2024-10-18T12_58_23_505Z-
+9 verbose logfile C:\Users\Diogo Sota\Documents\MyProjects\solitaire-tut\tmpnodejsnpm-cache\_logs\2024-10-18T12_58_23_505Z-debug-0.log
+10 silly packumentCache heap:4345298944 maxSize:1086324736 maxEntrySize:543162368
+11 silly logfile done cleaning log files
+12 silly idealTree buildDeps
+13 silly fetch manifest pnpm@*
+14 silly packumentCache full:https://registry.npmjs.org/pnpm cache-miss
+15 http fetch GET 200 https://registry.npmjs.org/pnpm 298ms (cache miss)
+16 silly packumentCache full:https://registry.npmjs.org/pnpm set size:undefined disposed:false
+17 silly placeDep ROOT pnpm@9.12.2 OK for:  want: *
+18 silly reify moves {}
+19 silly tarball no local data for pnpm@https://registry.npmjs.org/pnpm/-/pnpm-9.12.2.tgz. Extracting by manifest.
+20 http fetch GET 200 https://registry.npmjs.org/pnpm/-/pnpm-9.12.2.tgz 1105ms (cache miss)
+21 silly ADD node_modules/pnpm
+22 verbose cwd C:\Users\Diogo Sota\Documents\MyProjects\solitaire-tut
+23 verbose os Windows_NT 10.0.19045
+24 verbose node v20.18.0
+25 verbose npm  v10.8.2
+26 verbose exit 0
+27 info ok
