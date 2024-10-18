@@ -369,8 +369,6 @@ export class GameScene extends Phaser.Scene {
 
             this.foundationPileCards[pileIndex].setVisible(true).setFrame(this.getCardFrame(pile));
         })
-
-        this.checkForWinScenario();
     }
 
     private showCardsInDrawPile(): void {
@@ -383,19 +381,5 @@ export class GameScene extends Phaser.Scene {
 
     private getCardFrame(data: Card | FoundationPile): number {
         return SUIT_FRAMES[data.suit] + data.value - 1;
-    }
-
-    private checkForWinScenario(): void {
-        // Other win scenario: draw and discard pile are empty, and there are no flipped down cards
-
-        let sum = 0;
-        this.solitaire.foundationPiles.forEach((pile: FoundationPile, pileIndex: number) => {
-            sum += pile.value;
-        })
-
-        // if all piles have value === 13, it means the game was won!
-        if ((sum / this.solitaire.foundationPiles.length) === 13) {
-            this.scene.start(SCENE_KEYS.TITLE);
-        }
     }
 }
