@@ -28,4 +28,12 @@ export class FoundationPile {
 
         this.#currentValue++;
     }
+
+    public removeCard(): void {
+        if (this.#currentValue === 0) {
+            return;
+        }
+
+        this.#currentValue--;
+    }
 }

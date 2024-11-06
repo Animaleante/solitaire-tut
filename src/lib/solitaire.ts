@@ -1,5 +1,5 @@
 import { Card } from "./card";
-import { CARD_SUIT } from "./common";
+import { CARD_SUIT, CardValue } from "./common";
 import { Deck } from "./deck";
 import { FoundationPile } from "./foundationPile";
 import { exhaustiveGuard } from "./utils";
@@ -14,10 +14,10 @@ export class Solitaire {
     
     constructor() {
         this.#deck = new Deck();
-        this.#foundationPileClub = new FoundationPile(CARD_SUIT.CLUB);
-        this.#foundationPileSpade = new FoundationPile(CARD_SUIT.SPADE);
         this.#foundationPileHeart = new FoundationPile(CARD_SUIT.HEART);
         this.#foundationPileDiamond = new FoundationPile(CARD_SUIT.DIAMOND);
+        this.#foundationPileSpade = new FoundationPile(CARD_SUIT.SPADE);
+        this.#foundationPileClub = new FoundationPile(CARD_SUIT.CLUB);
         this.#tableauPiles = [[], [], [], [], [], [], []];
     }
     
@@ -35,10 +35,10 @@ export class Solitaire {
     
     get foundationPiles(): FoundationPile[] {
         return [
-            this.#foundationPileClub,
-            this.#foundationPileSpade,
             this.#foundationPileHeart,
             this.#foundationPileDiamond,
+            this.#foundationPileSpade,
+            this.#foundationPileClub,
         ];
     }
     
@@ -68,10 +68,6 @@ export class Solitaire {
                 this.tableauPiles[j].push(card);
             }
         }
-
-        /*for (let i = 0; i < 7; i++) {
-            console.log(i, this.tableauPiles[i][this.tableauPiles[i].length - 1]);
-        }*/
     }
     
     public drawCard(): boolean {
@@ -149,6 +145,29 @@ export class Solitaire {
         
         this.addCardToFoundation(card);
         tableauPile.pop();
+
+        return true;
+    }
+    
+    public moveFoundationCardToTableau(
+        foundationPileIndex: number,
+        targetTableauPileIndex: number
+    ): boolean {
+        const foundationPile = this.foundationPiles[foundationPileIndex];
+        const targetTableauPile = this.#tableauPiles[targetTableauPileIndex];
+        if (foundationPile === undefined || targetTableauPile === undefined) {
+            return false;
+        }
+
+        const card = new Card(foundationPile.suit, foundationPile.value as CardValue);
+
+        if (!this.isValidMoveToAddCardToTableau(card, targetTableauPile)) {
+            return false;
+        }
+
+        // const cardToMove = initialTableauPile.splice(cardIndex,1);
+        this.removeCardFromFoundation(foundationPileIndex);
+        targetTableauPile.push(card);
 
         return true;
     }
@@ -247,7 +266,12 @@ export class Solitaire {
         }
 
         foundationPile.addCard();
+    }
 
+    private removeCardFromFoundation(foundationIndex: number): void {
+        const foundationPile: FoundationPile = this.foundationPiles[foundationIndex];
+        // TODO - check if variable is empty
+        foundationPile.removeCard();
     }
 
     private isValidMoveToAddCardToTableau(card: Card, tableauPile: Card[]): boolean {
